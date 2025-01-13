@@ -24,29 +24,29 @@
     <link rel="preconnect" href="https://api.lincx.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <script>
-      (function () {
-        if (!window.Promise) return;
-        var lookupUrl = "https://geometer.lincx.la/api/lookup";
+      ;(function () {
+        if (!window.Promise) return
+        var lookupUrl = 'https://geometer.lincx.la/api/lookup'
         var cachedResponsePromise = fetch(lookupUrl)
           .then(function (res) {
-            return res.ok ? res.json() : Promise.reject(res.status);
+            return res.ok ? res.json() : Promise.reject(res.status)
           })
           .catch(function (err) {
-            console.error("Preload Error:", err);
-            return null;
-          });
-        var originalFetch = window.fetch;
+            console.error('Preload Error:', err)
+            return null
+          })
+        var originalFetch = window.fetch
         window.fetch = function (url, opts) {
           return url === lookupUrl
             ? cachedResponsePromise.then(function (data) {
                 return new Response(JSON.stringify(data), {
-                  headers: { "Content-Type": "application/json" },
-                  status: 200,
-                });
+                  headers: { 'Content-Type': 'application/json' },
+                  status: 200
+                })
               })
-            : originalFetch(url, opts);
-        };
-      })();
+            : originalFetch(url, opts)
+        }
+      })()
     </script>
     <link
       rel="preload"
@@ -99,7 +99,7 @@
         -moz-osx-font-smoothing: grayscale;
       }
       body {
-        font-family: "Nunito", sans-serif;
+        font-family: 'Nunito', sans-serif;
         font-weight: 400;
         font-size: 14px;
         line-height: normal;
@@ -388,33 +388,33 @@
       }
     </style>
     <script type="text/javascript">
-      const qs = new URLSearchParams(window.location.search);
+      const qs = new URLSearchParams(window.location.search)
       const zoneConfigs = [
         {
-          zoneId: "l7b7gg",
-          targetElement: document.getElementsByClassName("header-right")[0],
+          zoneId: 'l7b7gg',
+          targetElement: document.querySelector('.header-right')
         },
         {
-          zoneId: "bx0ehm",
-          targetElement: document.getElementById("__lincx_advertorial__"),
-        },
-      ];
+          zoneId: 'bx0ehm',
+          targetElement: document.querySelector('#__lincx_advertorial__')
+        }
+      ]
       zoneConfigs.forEach(({ zoneId, targetElement }) => {
         if (targetElement) {
-          const script = document.createElement("script");
-          script.src = "https://api.lincx.com/load";
-          script.type = "text/javascript";
-          script.setAttribute("data-zone-id", zoneId);
-          script.setAttribute("data-newid", qs.get("id"));
+          const script = document.createElement('script')
+          script.src = 'https://api.lincx.com/load'
+          script.type = 'text/javascript'
+          script.setAttribute('data-zone-id', zoneId)
+          script.setAttribute('data-newid', qs.get('id'))
 
           // Add all URL parameters as data attributes
           for (const [key, value] of qs.entries()) {
-            script.setAttribute(`data-${key}`, value);
+            script.setAttribute(`data-${key}`, value)
           }
 
-          targetElement.appendChild(script);
+          targetElement.appendChild(script)
         }
-      });
+      })
     </script>
   </head>
 
@@ -447,15 +447,15 @@
       </header>
       <div id="__lincx_advertorial__" style="min-height: 250vh">
         <script type="text/javascript">
-          const scriptC = document.createElement("script");
-          scriptC.src = "https://api.lincx.com/load";
-          scriptC.setAttribute("type", "text/javascript");
-          scriptC.setAttribute("data-zone-id", "bx0ehm");
-          scriptC.setAttribute("data-newid", qs.get("id"));
+          const scriptC = document.createElement('script')
+          scriptC.src = 'https://api.lincx.com/load'
+          scriptC.setAttribute('type', 'text/javascript')
+          scriptC.setAttribute('data-zone-id', 'bx0ehm')
+          scriptC.setAttribute('data-newid', qs.get('id'))
           for (let pair of qs.entries()) {
-            scriptC.setAttribute("data" + "-" + pair[0], pair[1]);
+            scriptC.setAttribute('data' + '-' + pair[0], pair[1])
           }
-          document.getElementById("__lincx_advertorial__").appendChild(scriptC);
+          document.getElementById('__lincx_advertorial__').appendChild(scriptC)
         </script>
       </div>
       <div class="container">
@@ -514,95 +514,95 @@
 
     <!-- Custom Js -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const referrer = sessionStorage.getItem("referrer");
-        if (!referrer) sessionStorage.setItem("referrer", document.referrer);
+      document.addEventListener('DOMContentLoaded', function () {
+        const referrer = sessionStorage.getItem('referrer')
+        if (!referrer) sessionStorage.setItem('referrer', document.referrer)
 
-        var currentYear = new Date().getFullYear();
-        var copyRightEl = document.querySelector(".copyright");
+        var currentYear = new Date().getFullYear()
+        var copyRightEl = document.querySelector('.copyright')
 
-        copyRightEl.innerHTML = "SunValue © " + currentYear;
+        copyRightEl.innerHTML = 'SunValue © ' + currentYear
 
-        window.addEventListener("scroll", function () {
-          var siteHeaderEl = document.querySelector(".site-header");
+        window.addEventListener('scroll', function () {
+          var siteHeaderEl = document.querySelector('.site-header')
           if (window.scrollY >= 50) {
-            return siteHeaderEl.classList.add("fixed");
+            return siteHeaderEl.classList.add('fixed')
           }
-          siteHeaderEl.classList.remove("fixed");
-        });
+          siteHeaderEl.classList.remove('fixed')
+        })
 
         function getFooterOffset() {
-          var footer = document.querySelector(".site-footer");
-          var footerHeight = footer.offsetHeight;
-          var offset = footerHeight * 0.98;
-          return offset;
+          var footer = document.querySelector('.site-footer')
+          var footerHeight = footer.offsetHeight
+          var offset = footerHeight * 0.98
+          return offset
         }
 
         function isElementInView(elem, offset) {
-          var rect = elem.getBoundingClientRect();
+          var rect = elem.getBoundingClientRect()
           return (
             rect.top >= 0 - offset &&
             rect.bottom <=
               (window.innerHeight || document.documentElement.clientHeight) +
                 offset
-          );
+          )
         }
 
         function animateOnScroll() {
-          var elements = document.querySelectorAll(".animation");
+          var elements = document.querySelectorAll('.animation')
           elements.forEach(function (elem) {
             if (isElementInView(elem, getFooterOffset())) {
-              var time = elem.dataset.delay || 0;
+              var time = elem.dataset.delay || 0
               setTimeout(function () {
-                elem.classList.add("go");
-              }, time);
+                elem.classList.add('go')
+              }, time)
             }
-          });
+          })
         }
 
-        window.addEventListener("scroll", animateOnScroll);
-        window.addEventListener("resize", animateOnScroll);
-      });
+        window.addEventListener('scroll', animateOnScroll)
+        window.addEventListener('resize', animateOnScroll)
+      })
     </script>
 
     <!-- Google Tag Manager & Convert Experiment -->
     <script>
-      var isLoaded = false;
-      window.addEventListener("load", function () {
+      var isLoaded = false
+      window.addEventListener('load', function () {
         const checkInterval = setInterval(function () {
           const cssLoaded = document.querySelector(
             '._lincxTemplateStyle_[data-zone-id="bx0ehm"]'
-          );
+          )
           if (cssLoaded && !isLoaded) {
-            isLoaded = true;
-            document.getElementById("__lincx_advertorial__").style.minHeight =
-              "auto";
-            clearInterval(checkInterval);
+            isLoaded = true
+            document.getElementById('__lincx_advertorial__').style.minHeight =
+              'auto'
+            clearInterval(checkInterval)
             setTimeout(function () {
-              (function (w, d, s, l, i) {
-                w[l] = w[l] || [];
+              ;(function (w, d, s, l, i) {
+                w[l] = w[l] || []
                 w[l].push({
-                  "gtm.start": new Date().getTime(),
-                  event: "gtm.js",
-                });
+                  'gtm.start': new Date().getTime(),
+                  event: 'gtm.js'
+                })
                 var f = d.getElementsByTagName(s)[0],
                   j = d.createElement(s),
-                  dl = l != "dataLayer" ? "&l=" + l : "";
-                j.async = true;
-                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-                f.parentNode.insertBefore(j, f);
-              })(window, document, "script", "dataLayer", "GTM-NZRLS3C");
+                  dl = l != 'dataLayer' ? '&l=' + l : ''
+                j.async = true
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+                f.parentNode.insertBefore(j, f)
+              })(window, document, 'script', 'dataLayer', 'GTM-NZRLS3C')
 
               // Load Convert Experiments
-              const convertScript = document.createElement("script");
-              convertScript.type = "text/javascript";
+              const convertScript = document.createElement('script')
+              convertScript.type = 'text/javascript'
               convertScript.src =
-                "//cdn-4.convertexperiments.com/v1/js/10047467-10048546.js";
-              document.head.appendChild(convertScript);
-            }, 800);
+                '//cdn-4.convertexperiments.com/v1/js/10047467-10048546.js'
+              document.head.appendChild(convertScript)
+            }, 800)
           }
-        }, 100);
-      });
+        }, 100)
+      })
     </script>
   </body>
 </html>
